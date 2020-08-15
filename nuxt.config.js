@@ -1,4 +1,18 @@
-import dinamicRoutes from './plugins/routesDinamic'
+import axios from 'axios'
+const dinamicRoutes = async () => {
+  const resForProducts = await axios.get('https://motelmalazia.com/api/rooms')
+
+  const routesForProducts = resForProducts.data.map((product) => {
+      return {
+          route : '/rooms/' + product.id,
+          payload: product
+      }
+  })
+
+  const routes = routesForProducts
+
+  return routes
+}
 
 export default {
   /*
@@ -68,15 +82,14 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
-    
+    analyze: true,   
   },
 
   axios: {
     // proxyHeaders: false
     baseURL: 'https://motelmalazia.com/api',
   },
-
-  generate : {
-      routes: dinamicRoutes
+  generate: {
+    routes: dinamicRoutes
   }
 }
