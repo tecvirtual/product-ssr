@@ -1,3 +1,4 @@
+import dinamicRoutes from './plugins/routesDinamic'
 
 export default {
   /*
@@ -69,8 +70,13 @@ export default {
   build: {
     
   },
+
   axios: {
     // proxyHeaders: false
     baseURL: 'https://motelmalazia.com/api',
+  },
+
+  generate : {
+      routes: dinamicRoutes
   }
 }
